@@ -1,0 +1,6 @@
+framework module JSONCocoapods {
+  umbrella header "JSONCocoapods-umbrella.h"
+
+  export *
+  module * { export * }
+}

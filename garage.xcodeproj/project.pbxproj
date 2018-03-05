@@ -7,14 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		12105301204B3E260086BC9D /* payload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12105300204B3E260086BC9D /* payload.swift */; };
+		12105303204C9CAC0086BC9D /* GarageCreds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12105302204C9CAC0086BC9D /* GarageCreds.swift */; };
 		125B5102203E2D650035C4EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B5101203E2D650035C4EA /* AppDelegate.swift */; };
 		125B5104203E2D650035C4EA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B5103203E2D650035C4EA /* ViewController.swift */; };
 		125B5107203E2D650035C4EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 125B5105203E2D650035C4EA /* Main.storyboard */; };
 		125B5109203E2D650035C4EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 125B5108203E2D650035C4EA /* Assets.xcassets */; };
 		125B510C203E2D650035C4EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 125B510A203E2D650035C4EA /* LaunchScreen.storyboard */; };
+		DF947C2B5797CCB0859EB2AF /* Pods_garage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C81A84838913089B5ABB157C /* Pods_garage.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		12105300204B3E260086BC9D /* payload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = payload.swift; sourceTree = "<group>"; };
+		12105302204C9CAC0086BC9D /* GarageCreds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarageCreds.swift; sourceTree = "<group>"; };
+		12105304204D9E010086BC9D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		12538E4C20477084007792C3 /* JWT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JWT.framework; path = ../../JWT.framework; sourceTree = "<group>"; };
 		125B50FE203E2D650035C4EA /* garage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = garage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		125B5101203E2D650035C4EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		125B5103203E2D650035C4EA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +29,9 @@
 		125B5108203E2D650035C4EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		125B510B203E2D650035C4EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		125B510D203E2D650035C4EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A37E95CEA22AC25229B8874C /* Pods-garage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-garage.release.xcconfig"; path = "Pods/Target Support Files/Pods-garage/Pods-garage.release.xcconfig"; sourceTree = "<group>"; };
+		C81A84838913089B5ABB157C /* Pods_garage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_garage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE6AD33837F53724C04B01A3 /* Pods-garage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-garage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-garage/Pods-garage.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +39,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF947C2B5797CCB0859EB2AF /* Pods_garage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		121A97D72045015A00566470 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				12538E4C20477084007792C3 /* JWT.framework */,
+				C81A84838913089B5ABB157C /* Pods_garage.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		125B50F5203E2D640035C4EA = {
 			isa = PBXGroup;
 			children = (
 				125B5100203E2D650035C4EA /* garage */,
 				125B50FF203E2D650035C4EA /* Products */,
+				121A97D72045015A00566470 /* Frameworks */,
+				4AFF774A8F2242B7CBF64162 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +76,26 @@
 		125B5100203E2D650035C4EA /* garage */ = {
 			isa = PBXGroup;
 			children = (
+				12105300204B3E260086BC9D /* payload.swift */,
+				12105302204C9CAC0086BC9D /* GarageCreds.swift */,
 				125B5101203E2D650035C4EA /* AppDelegate.swift */,
 				125B5103203E2D650035C4EA /* ViewController.swift */,
+				12105304204D9E010086BC9D /* README.md */,
 				125B5105203E2D650035C4EA /* Main.storyboard */,
 				125B5108203E2D650035C4EA /* Assets.xcassets */,
 				125B510A203E2D650035C4EA /* LaunchScreen.storyboard */,
 				125B510D203E2D650035C4EA /* Info.plist */,
 			);
 			path = garage;
+			sourceTree = "<group>";
+		};
+		4AFF774A8F2242B7CBF64162 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DE6AD33837F53724C04B01A3 /* Pods-garage.debug.xcconfig */,
+				A37E95CEA22AC25229B8874C /* Pods-garage.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +105,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 125B5110203E2D650035C4EA /* Build configuration list for PBXNativeTarget "garage" */;
 			buildPhases = (
+				D8B23A09736C62CBC17A76BD /* [CP] Check Pods Manifest.lock */,
 				125B50FA203E2D640035C4EA /* Sources */,
 				125B50FB203E2D640035C4EA /* Frameworks */,
 				125B50FC203E2D640035C4EA /* Resources */,
+				740EA49341EA8C556AADE3AE /* [CP] Embed Pods Frameworks */,
+				A095CCB6E02C53914E909C5D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -131,12 +168,78 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		740EA49341EA8C556AADE3AE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-garage/Pods-garage-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Bits/Bits.framework",
+				"${BUILT_PRODUCTS_DIR}/Core/Core.framework",
+				"${BUILT_PRODUCTS_DIR}/Debugging/Debugging.framework",
+				"${BUILT_PRODUCTS_DIR}/JSONCocoapods/JSONCocoapods.framework",
+				"${BUILT_PRODUCTS_DIR}/JWTCocoapods/JWTCocoapods.framework",
+				"${BUILT_PRODUCTS_DIR}/NodeCocoapods/NodeCocoapods.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bits.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Core.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Debugging.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSONCocoapods.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JWTCocoapods.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NodeCocoapods.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-garage/Pods-garage-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A095CCB6E02C53914E909C5D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-garage/Pods-garage-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D8B23A09736C62CBC17A76BD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-garage-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		125B50FA203E2D640035C4EA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12105303204C9CAC0086BC9D /* GarageCreds.swift in Sources */,
 				125B5104203E2D650035C4EA /* ViewController.swift in Sources */,
+				12105301204B3E260086BC9D /* payload.swift in Sources */,
 				125B5102203E2D650035C4EA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,11 +375,24 @@
 		};
 		125B5111203E2D650035C4EA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DE6AD33837F53724C04B01A3 /* Pods-garage.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/**",
+					"$(PROJECT_DIR)",
+					"$(inherited)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"~/Projects/JWT.framework/Headers",
+					"~/Projects/JSON.framework/Headers",
+				);
 				INFOPLIST_FILE = garage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = Bloggityblogblog.garage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -286,11 +402,24 @@
 		};
 		125B5112203E2D650035C4EA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A37E95CEA22AC25229B8874C /* Pods-garage.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/**",
+					"$(PROJECT_DIR)",
+					"$(inherited)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"~/Projects/JWT.framework/Headers",
+					"~/Projects/JSON.framework/Headers",
+				);
 				INFOPLIST_FILE = garage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = Bloggityblogblog.garage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
