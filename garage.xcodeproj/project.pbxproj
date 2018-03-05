@@ -20,7 +20,6 @@
 /* Begin PBXFileReference section */
 		12105300204B3E260086BC9D /* payload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = payload.swift; sourceTree = "<group>"; };
 		12105302204C9CAC0086BC9D /* GarageCreds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarageCreds.swift; sourceTree = "<group>"; };
-		12105304204D9E010086BC9D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		12538E4C20477084007792C3 /* JWT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JWT.framework; path = ../../JWT.framework; sourceTree = "<group>"; };
 		125B50FE203E2D650035C4EA /* garage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = garage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		125B5101203E2D650035C4EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -80,7 +79,6 @@
 				12105302204C9CAC0086BC9D /* GarageCreds.swift */,
 				125B5101203E2D650035C4EA /* AppDelegate.swift */,
 				125B5103203E2D650035C4EA /* ViewController.swift */,
-				12105304204D9E010086BC9D /* README.md */,
 				125B5105203E2D650035C4EA /* Main.storyboard */,
 				125B5108203E2D650035C4EA /* Assets.xcassets */,
 				125B510A203E2D650035C4EA /* LaunchScreen.storyboard */,
