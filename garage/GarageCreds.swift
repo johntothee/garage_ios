@@ -47,29 +47,30 @@ class GarageCreds: NSObject, NSCoding {
     
     //MARK: NSCoding
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(ipAddress, forKey: PropertyKey.ipAddress)
-        aCoder.encode(apiKey, forKey: PropertyKey.apiKey)
-        aCoder.encode(port, forKey: PropertyKey.port)
-        aCoder.encode(uid, forKey: PropertyKey.uid)
-        aCoder.encode(publicKey, forKey: PropertyKey.publicKey)
-        aCoder.encode(privateKey, forKey: PropertyKey.privateKey)
+        aCoder.encode(self.ipAddress, forKey: PropertyKey.ipAddress)
+        aCoder.encode(self.apiKey, forKey: PropertyKey.apiKey)
+        aCoder.encodeCInt(Int32(self.port), forKey: PropertyKey.port)
+        aCoder.encodeCInt(Int32(self.uid), forKey: PropertyKey.uid)
+        aCoder.encode(self.publicKey, forKey: PropertyKey.publicKey)
+        aCoder.encode(self.privateKey, forKey: PropertyKey.privateKey)
 
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
-        guard let uid = aDecoder.decodeObject(forKey: PropertyKey.uid) as? Int else {
-            os_log("Unable to decode the uid for garageCreds object.", log: OSLog.default, type: .debug)
-            return nil
-        }
         guard let ipAddress = aDecoder.decodeObject(forKey: PropertyKey.ipAddress) as? String else {
             os_log("Unable to decode the ipAddress for garageCreds Object.", log: OSLog.default, type: .debug)
             return nil
         }
+        guard let uid = aDecoder.decodeInteger(forKey: PropertyKey.uid) as? Int else {
+            os_log("Unable to decode the uid for garageCreds object.", log: OSLog.default, type: .debug)
+            return nil
+        }
+
         guard let apiKey = aDecoder.decodeObject(forKey: PropertyKey.apiKey) as? String else {
             os_log("Unable to decode the apiKey for garageCreds Object.", log: OSLog.default, type: .debug)
             return nil
         }
-        guard let port = aDecoder.decodeObject(forKey: PropertyKey.port) as? Int else {
+        guard let port = aDecoder.decodeInteger(forKey: PropertyKey.port) as? Int else {
             os_log("Unable to decode the port for garageCreds Object.", log: OSLog.default, type: .debug)
             return nil
         }

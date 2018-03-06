@@ -24,7 +24,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var publicKeyTextField: UITextField!
     @IBOutlet weak var privateKeyTextField: UITextField!
     
-    private var creds: GarageCreds! = GarageCreds(ipAddress: "127.0.0.1", apiKey: "abc", port: 3000, uid: 1, publicKey: "insert public Key here", privateKey: "abc")
+    private var creds: GarageCreds! = GarageCreds(
+        ipAddress: "127.0.0.1",
+        apiKey: "abc",
+        port: 3000,
+        uid: 1,
+        publicKey: "insert public Key here",
+        privateKey: "abc"
+    )
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -143,29 +150,27 @@ class ViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    private func loadGarageCreds() -> GarageCreds!  {
+    private func loadGarageCreds() -> GarageCreds?  {
         return NSKeyedUnarchiver.unarchiveObject(withFile: GarageCreds.ArchiveURL.path) as? GarageCreds
     }
     
     private func save() {
-//        if !self.allValuesSet() {
-//            return
-//        }
-        creds.ipAddress = ipTextField.text!
-        creds.apiKey = apiKeyTextField.text!
-        creds.port = Int(portTextField.text!)!
-        creds.uid = Int(uidTextField.text!)!
-        creds.publicKey = publicKeyTextField.text!
-        creds.privateKey = privateKeyTextField.text!
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(creds, toFile: GarageCreds.ArchiveURL.path)
+        if !self.allValuesSet() {
+            return
+        }
+        self.creds.ipAddress = ipTextField.text!
+        self.creds.apiKey = apiKeyTextField.text!
+        self.creds.port = Int(portTextField.text!)!
+        self.creds.uid = Int(uidTextField.text!)!
+        self.creds.publicKey = publicKeyTextField.text!
+        self.creds.privateKey = privateKeyTextField.text!
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(self.creds, toFile: GarageCreds.ArchiveURL.path)
         if isSuccessfulSave {
             os_log("Creds successfully saved.", log: OSLog.default, type: .debug)
         } else {
             os_log("Failed to save creds...", log: OSLog.default, type: .error)
         }
     }
-    
-
 }
 
 
