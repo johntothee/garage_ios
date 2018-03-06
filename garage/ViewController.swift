@@ -24,8 +24,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var publicKeyTextField: UITextField!
     @IBOutlet weak var privateKeyTextField: UITextField!
     
-    weak var creds: GarageCreds!
-    
+    private var creds: GarageCreds! = GarageCreds(ipAddress: "127.0.0.1", apiKey: "abc", port: 3000, uid: 1, publicKey: "insert public Key here", privateKey: "abc")
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.ipTextField.delegate = self
@@ -35,15 +35,26 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.publicKeyTextField.delegate = self
         self.privateKeyTextField.delegate = self
 
-        let creds: GarageCreds! = loadGarageCreds()
-        if (creds != nil) {
-            self.ipTextField.text = creds.ipAddress
-            self.apiKeyTextField.text = creds.apiKey
-            self.portTextField.text = String(creds.port)
-            self.uidTextField.text = String(creds.uid)
-            self.publicKeyTextField.text = creds.publicKey
-            self.privateKeyTextField.text = creds.privateKey
+        self.ipTextField.text = self.creds.ipAddress
+        self.apiKeyTextField.text = self.creds.apiKey
+        self.portTextField.text = String(self.creds.port)
+        self.uidTextField.text = String(self.creds.uid)
+        self.publicKeyTextField.text = self.creds.publicKey
+        self.privateKeyTextField.text = self.creds.privateKey
+        
+        self.creds = self.loadGarageCreds()
+        if (self.creds != nil) {
+            self.ipTextField.text = self.creds.ipAddress
+            self.apiKeyTextField.text = self.creds.apiKey
+            self.portTextField.text = String(self.creds.port)
+            self.uidTextField.text = String(self.creds.uid)
+            self.publicKeyTextField.text = self.creds.publicKey
+            self.privateKeyTextField.text = self.creds.privateKey
         }
+        else {
+            self.creds = GarageCreds(ipAddress: " ", apiKey: " ", port: 0, uid: 2, publicKey: " ", privateKey: " ")
+        }
+
         // Do any additional setup after loading the view, typically from a nib.
         // if keys fields populated, make generateKeyPair button inactive
         if (!self.allValuesSet()) {
@@ -137,12 +148,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func save() {
-        creds?.ipAddress = ipTextField.text!
-        creds?.apiKey = apiKeyTextField.text!
-        creds?.port = Int(portTextField.text!)!
-        creds?.uid = Int(uidTextField.text!)!
-        creds?.publicKey = publicKeyTextField.text!
-        creds?.privateKey = privateKeyTextField.text!
+//        if !self.allValuesSet() {
+//            return
+//        }
+        creds.ipAddress = ipTextField.text!
+        creds.apiKey = apiKeyTextField.text!
+        creds.port = Int(portTextField.text!)!
+        creds.uid = Int(uidTextField.text!)!
+        creds.publicKey = publicKeyTextField.text!
+        creds.privateKey = privateKeyTextField.text!
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(creds, toFile: GarageCreds.ArchiveURL.path)
         if isSuccessfulSave {
             os_log("Creds successfully saved.", log: OSLog.default, type: .debug)
