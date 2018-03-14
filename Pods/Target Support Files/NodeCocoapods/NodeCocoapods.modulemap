@@ -1,6 +1,0 @@
-framework module NodeCocoapods {
-  umbrella header "NodeCocoapods-umbrella.h"
-
-  export *
-  module * { export * }
-}

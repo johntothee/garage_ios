@@ -1,6 +1,0 @@
-framework module Bits {
-  umbrella header "Bits-umbrella.h"
-
-  export *
-  module * { export * }
-}

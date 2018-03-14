@@ -18,7 +18,6 @@ class GarageCreds: NSObject, NSCoding {
     var apiKey: String
     var port: Int
     var uid: Int
-    var publicKey: String
     var privateKey: String
     
     //MARK: Archiving Paths
@@ -31,17 +30,15 @@ class GarageCreds: NSObject, NSCoding {
         static let apiKey = "apiKey"
         static let port = "port"
         static let uid = "uid"
-        static let publicKey = "publicKey"
         static let privateKey = "privateKey"
     }
     
     //MARK: Initialization
-    init(ipAddress: String, apiKey: String, port: Int, uid: Int, publicKey: String, privateKey: String) {
+    init(ipAddress: String, apiKey: String, port: Int, uid: Int, privateKey: String) {
         self.ipAddress = ipAddress
         self.apiKey = apiKey
         self.port = port
         self.uid = uid
-        self.publicKey = publicKey
         self.privateKey = privateKey
     }
     
@@ -51,7 +48,6 @@ class GarageCreds: NSObject, NSCoding {
         aCoder.encode(self.apiKey, forKey: PropertyKey.apiKey)
         aCoder.encodeCInt(Int32(self.port), forKey: PropertyKey.port)
         aCoder.encodeCInt(Int32(self.uid), forKey: PropertyKey.uid)
-        aCoder.encode(self.publicKey, forKey: PropertyKey.publicKey)
         aCoder.encode(self.privateKey, forKey: PropertyKey.privateKey)
 
     }
@@ -74,15 +70,11 @@ class GarageCreds: NSObject, NSCoding {
             os_log("Unable to decode the port for garageCreds Object.", log: OSLog.default, type: .debug)
             return nil
         }
-        guard let publicKey = aDecoder.decodeObject(forKey: PropertyKey.publicKey) as? String else {
-            os_log("Unable to decode the publicKey for garageCreds Object.", log: OSLog.default, type: .debug)
-            return nil
-        }
         guard let privateKey = aDecoder.decodeObject(forKey: PropertyKey.privateKey) as? String else {
             os_log("Unable to decode the privateKey for garageCreds Object.", log: OSLog.default, type: .debug)
             return nil
         }
-        self.init(ipAddress: ipAddress, apiKey: apiKey, port: port, uid: uid, publicKey: publicKey, privateKey: privateKey)
+        self.init(ipAddress: ipAddress, apiKey: apiKey, port: port, uid: uid, privateKey: privateKey)
     }
     
 }

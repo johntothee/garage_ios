@@ -7,12 +7,10 @@
 //
 
 import UIKit
-import JWTCocoapods
-import JSONCocoapods
+import JWT
 import os.log
 
-
-class ViewController: UIViewController, UITextFieldDelegate {
+class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate {
 
     // MARK: Properties
     @IBOutlet weak var verify: UIButton!
@@ -21,7 +19,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var apiKeyTextField: UITextField!
     @IBOutlet weak var portTextField: UITextField!
     @IBOutlet weak var uidTextField: UITextField!
-    @IBOutlet weak var publicKeyTextField: UITextField!
     @IBOutlet weak var privateKeyTextField: UITextField!
     
     private var creds: GarageCreds! = GarageCreds(
@@ -29,7 +26,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         apiKey: "abc",
         port: 3000,
         uid: 1,
-        publicKey: "insert public Key here",
         privateKey: "abc"
     )
 
@@ -39,14 +35,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.apiKeyTextField.delegate = self
         self.portTextField.delegate = self
         self.uidTextField.delegate = self
-        self.publicKeyTextField.delegate = self
         self.privateKeyTextField.delegate = self
 
         self.ipTextField.text = self.creds.ipAddress
         self.apiKeyTextField.text = self.creds.apiKey
         self.portTextField.text = String(self.creds.port)
         self.uidTextField.text = String(self.creds.uid)
-        self.publicKeyTextField.text = self.creds.publicKey
         self.privateKeyTextField.text = self.creds.privateKey
         
         self.creds = self.loadGarageCreds()
@@ -55,11 +49,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
             self.apiKeyTextField.text = self.creds.apiKey
             self.portTextField.text = String(self.creds.port)
             self.uidTextField.text = String(self.creds.uid)
-            self.publicKeyTextField.text = self.creds.publicKey
             self.privateKeyTextField.text = self.creds.privateKey
         }
         else {
-            self.creds = GarageCreds(ipAddress: " ", apiKey: " ", port: 0, uid: 2, publicKey: " ", privateKey: " ")
+            self.creds = GarageCreds(
+                ipAddress: " ",
+                apiKey: " ",
+                port: 0,
+                uid: 2,
+                privateKey: " "
+            )
         }
 
         // Do any additional setup after loading the view, typically from a nib.
@@ -69,13 +68,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         
         // @TODO: test if verify is completed, and disable openClose if not.
-        openClose.isEnabled = false
-        
-        //testing
-        let payload = Payload(uid: 1, command: "open-close")
-        let test = String(describing: try? payload.makeJSON())
-        print(test)
-        
+        //openClose.isEnabled = false
+ 
     }
     
     override func didReceiveMemoryWarning() {
@@ -111,11 +105,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
     // MARK: Actions
     // Send a verify command.
     @IBAction func verify(_ sender: UIButton) {
-        
+        sendToken("verify")
     }
     
     // Send an open-close command.
     @IBAction func openClose(_ sender: UIButton) {
+        sendToken("open-close")
     }
     
     // Create a Jwt token.
@@ -124,7 +119,38 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     // Send token to server.
     func sendToken(_ token: String) {
-        //let frameworkObject = JWT.init()
+        let headers:[String:Any] = ["alg":"RS256","typ":"jwt"]
+        
+
+        do {
+            let timestamp = Int64(NSDate().timeIntervalSince1970)
+            let payload:[String:Any] = ["uid":self.creds.uid,"command":token,"iat":timestamp]
+            
+            let privateKey = try JWTCryptoKeyPrivate(pemEncoded: self.creds.privateKey, parameters: nil)
+            guard let holder = JWTAlgorithmRSFamilyDataHolder().signKey(privateKey)?.secretData(Data())?.algorithmName(JWTAlgorithmNameRS256) else {return}
+            guard let encoding = JWTEncodingBuilder.encodePayload(payload).headers(headers)?.addHolder(holder) else {return}
+            let result = encoding.result
+            print(result?.successResult?.encoded ?? "Encoding failed")
+            print(result?.errorResult?.error ?? "No encoding error")
+            var url = "https://"
+            url += self.creds.ipAddress
+            url += ":"
+            url += String(self.creds.port)
+            url += "/api/garage?apikey="
+            url += self.creds.apiKey
+            url += "&token="
+            url += (result?.successResult?.encoded)!
+            var urlObject = URL(string: url )
+            
+            let task = URLSession.shared.dataTask(with: urlObject!) {(data, response, error) in
+                print(NSString(data: data!, encoding: String.Encoding.utf8.rawValue))
+            }
+            
+            task.resume()
+        }
+        catch {
+            print(error)
+        }
     }
     
     // Test if all values are set
@@ -139,9 +165,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
             return false
         }
         if (uidTextField.text == "") {
-            return false
-        }
-        if (publicKeyTextField.text == "") {
             return false
         }
         if (privateKeyTextField.text == "") {
@@ -162,7 +185,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.creds.apiKey = apiKeyTextField.text!
         self.creds.port = Int(portTextField.text!)!
         self.creds.uid = Int(uidTextField.text!)!
-        self.creds.publicKey = publicKeyTextField.text!
         self.creds.privateKey = privateKeyTextField.text!
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(self.creds, toFile: GarageCreds.ArchiveURL.path)
         if isSuccessfulSave {

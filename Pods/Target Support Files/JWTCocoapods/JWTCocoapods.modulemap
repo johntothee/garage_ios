@@ -1,6 +1,0 @@
-framework module JWTCocoapods {
-  umbrella header "JWTCocoapods-umbrella.h"
-
-  export *
-  module * { export * }
-}

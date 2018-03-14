@@ -1,56 +1,19 @@
 PODS:
-  - Bits (1.0.0):
-    - Bits/Default (= 1.0.0)
-  - Bits/Default (1.0.0)
-  - Core (2.0.1):
-    - Core/Default (= 2.0.1)
-  - Core/Default (2.0.1):
-    - Bits (~> 1.0)
-    - Core/libc
-    - Debugging (~> 1.0)
-  - Core/libc (2.0.1)
-  - Debugging (1.0.0):
-    - Debugging/Default (= 1.0.0)
-  - Debugging/Default (1.0.0)
-  - JSONCocoapods (2.0.2):
-    - JSONCocoapods/Default (= 2.0.2)
-  - JSONCocoapods/Default (2.0.2):
-    - NodeCocoapods (~> 2.0)
-  - JWTCocoapods (3.0.0):
-    - JSONCocoapods
-    - JWTCocoapods/Default (= 3.0.0)
-    - NodeCocoapods
-  - JWTCocoapods/Default (3.0.0):
-    - JSONCocoapods
-    - NodeCocoapods
-  - NodeCocoapods (2.0.3):
-    - NodeCocoapods/Default (= 2.0.3)
-  - NodeCocoapods/Default (2.0.3):
-    - Bits (~> 1.0)
-    - Core (~> 2.0)
-    - Debugging (~> 1.0)
+  - Base64 (1.1.2)
+  - JWT (3.0.0-beta.8):
+    - Base64 (~> 1.1.2)
 
 DEPENDENCIES:
-  - JSONCocoapods (from `~/Projects/jwt/Dependencies/json`)
-  - JWTCocoapods (from `~/Projects/jwt/`)
-  - NodeCocoapods (from `~/Projects/jwt/Dependencies/node`)
+  - JWT (from `~/Projects/JWT/`)
 
 EXTERNAL SOURCES:
-  JSONCocoapods:
-    :path: ~/Projects/jwt/Dependencies/json
-  JWTCocoapods:
-    :path: ~/Projects/jwt/
-  NodeCocoapods:
-    :path: ~/Projects/jwt/Dependencies/node
+  JWT:
+    :path: ~/Projects/JWT/
 
 SPEC CHECKSUMS:
-  Bits: 9290c3ecc5d4f31f579d26aea770ad65979d6720
-  Core: 661407ca4df71911247661ec76c4a1ca8081f505
-  Debugging: 08333eb2b90d8208113c610b7a5016f3453f6072
-  JSONCocoapods: bca9e01f0810a41f66f29170e52da1f1de7f5974
-  JWTCocoapods: b7fd96ba64d8412677c84f2b7e8472a8ae7bb571
-  NodeCocoapods: 3107167e0e3d4af033ea08111558d6145ab23c50
+  Base64: cecfb41a004124895a7bcee567a89bae5a89d49b
+  JWT: a1a9d0251e3ca37d8b6a437e3bf15a868cc1294b
 
-PODFILE CHECKSUM: ca7823cd8e51a89442dacfcb70be73080d242107
+PODFILE CHECKSUM: 1958bf8dc6ef2556a96cc17080550ce302f43137
 
 COCOAPODS: 1.4.0
