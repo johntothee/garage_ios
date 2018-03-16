@@ -31,6 +31,15 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.openClose.layer.cornerRadius = 25
+        self.openClose.layer.borderWidth = 1
+        self.openClose.layer.borderColor = UIColor.black.cgColor
+        
+        self.verify.layer.cornerRadius = 10
+        self.verify.layer.borderWidth = 1
+        self.verify.layer.borderColor = UIColor.black.cgColor
+        
         self.ipTextField.delegate = self
         self.apiKeyTextField.delegate = self
         self.portTextField.delegate = self
@@ -120,7 +129,7 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
     // Send token to server.
     func sendToken(_ token: String) {
         let headers:[String:Any] = ["alg":"RS256","typ":"jwt"]
-        
+        var urlResponse:NSString = ""
 
         do {
             let timestamp = Int64(NSDate().timeIntervalSince1970)
@@ -143,7 +152,16 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
             var urlObject = URL(string: url )
             
             let task = URLSession.shared.dataTask(with: urlObject!) {(data, response, error) in
-                print(NSString(data: data!, encoding: String.Encoding.utf8.rawValue))
+                print("response string:")
+                if (data != nil) {
+                    print(NSString(data: data!, encoding: String.Encoding.utf8.rawValue))
+                    urlResponse = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)!
+                    self.verifySuccess(String(urlResponse))
+                }
+                else {
+                    self.verifySuccess("No response from garage!")
+                }
+
             }
             
             task.resume()
@@ -151,6 +169,19 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
         catch {
             print(error)
         }
+        print("Here is the response:")
+        print(urlResponse)
+    }
+    
+    // Alert that verify command worked
+    private func verifySuccess(_ response: String) {
+        let alert = UIAlertController(title: "Received from garage:", message: response, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "ok", style: .default, handler: nil))
+        if (response == "No response from garage!") {
+            alert.addAction(UIAlertAction(title: "Try Again?", style: .cancel, handler: nil))
+        }
+        self.present(alert, animated: true)
     }
     
     // Test if all values are set
