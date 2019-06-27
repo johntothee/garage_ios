@@ -134,10 +134,17 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
         do {
             let timestamp = Int64(NSDate().timeIntervalSince1970)
             let payload:[String:Any] = ["uid":self.creds.uid,"command":token,"iat":timestamp]
-            
+
             let privateKey = try JWTCryptoKeyPrivate(pemEncoded: self.creds.privateKey, parameters: nil)
-            guard let holder = JWTAlgorithmRSFamilyDataHolder().signKey(privateKey)?.secretData(Data())?.algorithmName(JWTAlgorithmNameRS256) else {return}
-            guard let encoding = JWTEncodingBuilder.encodePayload(payload).headers(headers)?.addHolder(holder) else {return}
+
+            guard let holder = JWTAlgorithmRSFamilyDataHolder().signKey(privateKey)?.secretData(Data())?.algorithmName(JWTAlgorithmNameRS256) else {
+                    print("cannot make holder")
+                    return
+                }
+            guard let encoding = JWTEncodingBuilder.encodePayload(payload).headers(headers)?.addHolder(holder) else {
+                print("cannot make endcoding")
+                return
+            }
             let result = encoding.result
             print(result?.successResult?.encoded ?? "Encoding failed")
             print(result?.errorResult?.error ?? "No encoding error")
@@ -175,13 +182,15 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
     
     // Alert that verify command worked
     private func verifySuccess(_ response: String) {
-        let alert = UIAlertController(title: "Received from garage:", message: response, preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: "ok", style: .default, handler: nil))
-        if (response == "No response from garage!") {
-            alert.addAction(UIAlertAction(title: "Try Again?", style: .cancel, handler: nil))
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Received from garage:", message: response, preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "ok", style: .default, handler: nil))
+            if (response == "No response from garage!") {
+                alert.addAction(UIAlertAction(title: "Try Again?", style: .cancel, handler: nil))
+            }
+            self.present(alert, animated: true)
         }
-        self.present(alert, animated: true)
     }
     
     // Test if all values are set
@@ -205,7 +214,11 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
     }
     
     private func loadGarageCreds() -> GarageCreds?  {
-        return NSKeyedUnarchiver.unarchiveObject(withFile: GarageCreds.ArchiveURL.path) as? GarageCreds
+        guard let results = NSKeyedUnarchiver.unarchiveObject(withFile: GarageCreds.ArchiveURL.path) as? GarageCreds else {
+            os_log("Unable to load GarageCreds from storage.", log: OSLog.default, type: .debug)
+            return nil
+        }
+        return results
     }
     
     private func save() {

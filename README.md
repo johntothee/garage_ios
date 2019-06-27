@@ -1,7 +1,7 @@
 #  garage_ios
 
-This swift project is a companion to the node app at https://github.com/johntothee/garage. Garage runs on a raspberry pi connected to relays to drive a solenoid that blocks the track of a garage door and triggers the manual open-close buton of a garage door opener. It receives an rsa signed jwt token. Garage_ios creates and sends these tokens.
+This swift project is a companion to the node app at https://github.com/johntothee/garage. Garage runs on a raspberry pi connected to relays to drive a solenoid that blocks the track of a garage door and triggers the manual open-close buton of a garage door opener. It receives an RSA signed JWT token. 
 
-While the node app is ready for final testing, garage_ios is a work in progress. As a complete noob at swift it took several attempts to include the JWT package and its dependencies from the vapor project - (the only jwt library for swift that does rsa signing). Ultimately it took modifying the repos added by cocoapods. I'll be submitting pull requests to those vapor projects shortly.
+Garage_ios creates and sends these tokens. To setup add the url, port, apikey string, and private key to the app. The final parameter of a request is a time stamped JWT token signed with the private key. The token also contains either the command "verify" or "open-close". Verify is for testing purposes to ensure everything is communicating properly. While the content of the token can be unencoded and read, only the public key can verify the signature.
 
-Todos: Credential fields are not yet saving correctly. Actually creating the token and sending it isn't implemented yet either.
+Requests are sent to https://[url]/api/garage:[port]?apiKey=[apikey]&token=[signed_jwt_token]

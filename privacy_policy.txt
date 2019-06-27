@@ -1,0 +1,5 @@
+Privacy Policy
+
+This app sends no data to anyone except for the endpoint you configure it to communicate with.
+
+Any information the app store sends me about purchasers will go no where. It will not be sold or shared with anyone.
